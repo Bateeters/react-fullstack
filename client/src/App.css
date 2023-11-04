@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+}
+
+.recipe {
+  border: 1px solid black;
+  margin: 50px 400px;
+  padding: 20px;
+}
