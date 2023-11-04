@@ -1,7 +1,13 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-const db = require('./models')
+app.use(express.json());
+
+const db = require('./models');
+
+// Routers
+const postRouter = require('./routes/Recipes');
+app.use("/recipes", postRouter);
 
 
 db.sequelize.sync().then(()=>{
