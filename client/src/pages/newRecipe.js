@@ -1,6 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import axios from "axios";
 
 function newRecipe() {
     const initialValues ={
@@ -17,7 +18,9 @@ function newRecipe() {
     });
 
     const onSubmit = (data) => {
-        console.log(data)
+        axios.post("http://localhost:3001/recipes", data).then((response)=>{
+            console.log("submitted")
+        });
     };
 
     return (
