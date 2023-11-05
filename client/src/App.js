@@ -1,28 +1,19 @@
 import './App.css';
-import axios from "axios"
-import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './pages/Home';
+import NewRecipe from './pages/newRecipe';
 
-function App() {
-
-  const[listOfRecipes, setListOfRecipes] = useState([]);
-
-  useEffect(()=> {
-    axios.get("http://localhost:3001/recipes").then((response)=>{
-      setListOfRecipes(response.data);
-    });
-  }, []);  
-
+function App() { 
   return (
     <div className="App">
-      {listOfRecipes.map((value, key) => { 
-        return (
-          <div className="recipe">
-            <div className="title">{value.title}</div>
-            <div className="body">{value.stepsText}</div>
-            <div className="footer">{value.username}</div>
-          </div>
-        );
-      })};
+      <Router>
+        <Link to="/newRecipe"> Add A New Recipe </Link>
+        <Link to="/"> Home </Link>
+        <Routes>
+          <Route path="/" exact element={<Home/>}/>
+          <Route path="/newRecipe" exact element={<NewRecipe/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
