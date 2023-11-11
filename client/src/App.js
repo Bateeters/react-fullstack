@@ -1,17 +1,19 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import Home from './pages/Home';
-import NewRecipe from './pages/newRecipe';
+import NewRecipe from './pages/NewRecipe';
+import Recipe from './pages/Recipe';
 
 function App() { 
   return (
     <div className="App">
       <Router>
-        <Link to="/newRecipe"> Add A New Recipe </Link>
         <Link to="/"> Home </Link>
+        <Link to="/NewRecipe"> Add A New Recipe </Link>
         <Routes>
           <Route path="/" exact element={<Home/>}/>
-          <Route path="/newRecipe" exact element={<NewRecipe/>}/>
+          <Route path="/NewRecipe" exact element={<NewRecipe/>}/>
+          <Route path="/Recipe/:id" exact element={<Recipe/>}/>
         </Routes>
       </Router>
     </div>
