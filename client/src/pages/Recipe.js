@@ -4,13 +4,20 @@ import axios from 'axios';
 
 function Recipe() {
     let {id} = useParams();
-    const [recipeObject, setRecipeObject] = useState({})
+    const [recipeObject, setRecipeObject] = useState({});
+    const [comments, setComments] = useState([]);
 
     useEffect(() => {
+        // Get data for specific recipe
         axios.get(`http://localhost:3001/recipes/byId/${id}`).then((response)=>{
             setRecipeObject(response.data);
         });
-    })
+
+        // return list of all comments related to specific recipe
+        axios.get(`http://localhost:3001/comments/${id}`).then((response) =>{
+            setComments(response.data);
+        });
+    }, []);
   
     return (
         <div className='recipePage'>
@@ -25,7 +32,16 @@ function Recipe() {
                 <div>Ingredients Section</div>
             </div>
             <div className='commentsSection'>
-                <div>Comment Section</div>
+                <div className='addCommentContainer'>
+                    <input type='text' placeholder='Comment...' autoComplete='off'/>
+                    <button> Add Comment </button>
+                </div>
+                <div className='listOfComments'>
+                    {comments.map((comment, key) => {
+                        return <div key={key} className='comment'> {comment.commentBody} </div>
+                    })}
+
+                </div>
             </div>
         </div>
     )

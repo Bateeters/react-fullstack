@@ -16,7 +16,7 @@ function Home() {
         <div>
             {listOfRecipes.map((value, key) => { 
                 return (
-                <div className="recipe" onClick={() => {navigate(`/recipe/${value.id}`)}}>
+                <div key={key} className="recipe" onClick={() => {navigate(`/recipe/${value.id}`)}}>
                     <div className="title">{value.title}</div>
                     <div className="body">{value.stepsText}</div>
                     <div className="footer">{value.username}</div>
