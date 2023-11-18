@@ -22,11 +22,28 @@ function Recipe() {
     }, []);
   
     const addComment = () => {
-        axios.post("http://localhost:3001/comments", {commentBody: newComment, RecipeId: id, username: commentUsername}).then((response)=>{
-        const commentToAdd = {commentBody: newComment, username: commentUsername};    
-        setComments([...comments, commentToAdd]);
-        setNewComment("")
-        setUsername("")
+        axios
+        .post("http://localhost:3001/comments", {
+            commentBody: newComment, 
+            RecipeId: id, 
+            username: commentUsername
+        },
+        {
+            headers: {
+                accessToken: sessionStorage.getItem("accessToken"),
+            },
+        }
+        
+        )
+        .then((response)=>{
+            if (response.data.error) {
+                console.log(response.data.error);
+            } else {
+                const commentToAdd = {commentBody: newComment, username: commentUsername};    
+                setComments([...comments, commentToAdd]);
+                setNewComment("")
+                setUsername("")
+            }
         });
     };
 
@@ -53,6 +70,7 @@ function Recipe() {
                     autoComplete='off' 
                     value={newComment}
                     onChange={(event)=>{setNewComment(event.target.value)}}/>
+                    
                     <input 
                     type='text' 
                     placeholder='username' 
