@@ -17,7 +17,7 @@ function NewRecipe() {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
         stepsText: Yup.string().required(),
-        username: Yup.string().min(8).max(24).required()
+        username: Yup.string().min(6).max(24).required()
     });
 
     const onSubmit = (data) => {
