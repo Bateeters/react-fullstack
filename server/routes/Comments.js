@@ -12,7 +12,9 @@ router.get("/:recipeId", async (req, res) => {
 });
 
 router.post("/", validateToken, async (req, res) =>{
-    const comment = req.body
+    const comment = req.body;
+    const username = req.user.username;
+    comment.username = username;
     await Comments.create(comment);
     res.json(comment);
 });

@@ -7,7 +7,6 @@ function Recipe() {
     const [recipeObject, setRecipeObject] = useState({});
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
-    const [commentUsername, setUsername] = useState("");
 
     useEffect(() => {
         // Get data for specific recipe
@@ -26,7 +25,6 @@ function Recipe() {
         .post("http://localhost:3001/comments", {
             commentBody: newComment, 
             RecipeId: id, 
-            username: commentUsername
         },
         {
             headers: {
@@ -39,10 +37,9 @@ function Recipe() {
             if (response.data.error) {
                 console.log(response.data.error);
             } else {
-                const commentToAdd = {commentBody: newComment, username: commentUsername};    
+                const commentToAdd = {commentBody: newComment, username: response.data.username};    
                 setComments([...comments, commentToAdd]);
-                setNewComment("")
-                setUsername("")
+                setNewComment("");
             }
         });
     };
@@ -71,17 +68,17 @@ function Recipe() {
                     value={newComment}
                     onChange={(event)=>{setNewComment(event.target.value)}}/>
                     
-                    <input 
-                    type='text' 
-                    placeholder='username' 
-                    autoComplete='off'
-                    value={commentUsername} 
-                    onChange={(event)=>{setUsername(event.target.value)}}/>
+
                     <button onClick={addComment}> Add Comment </button>
                 </div>
                 <div className='listOfComments'>
                     {comments.map((comment, key) => {
-                        return <div key={key} className='comment'> {comment.commentBody} - {comment.username} </div>
+                        return (
+                            <div key={key} className='comment'> 
+                                {comment.commentBody}
+                                <label> - {comment.username}</label>
+                            </div>
+                        )
                     })}
 
                 </div>
