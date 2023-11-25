@@ -1,22 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Favorite from '@mui/icons-material/Favorite';
+import { AuthContext } from '../helpers/AuthContext';
 
 function Home() {
     const[listOfRecipes, setListOfRecipes] = useState([]);
     const [likedRecipes, setLikedRecipes] = useState([]);
+    const { authState } = useContext(AuthContext);
     let navigate = useNavigate();
 
     useEffect(()=> {
-        axios
-        .get("http://localhost:3001/recipes",
-            { headers: {accessToken: localStorage.getItem('accessToken')}}
-        ).then((response)=>{
-            setListOfRecipes(response.data.listOfRecipes);
-            setLikedRecipes(response.data.likedRecipes.map((like)=>{return like.RecipeId}));
-        });
+
+        if (!authState.status){
+            navigate("/login");
+        } else {
+            axios
+            .get("http://localhost:3001/recipes",
+                { headers: {accessToken: localStorage.getItem('accessToken')}}
+            ).then((response)=>{
+                setListOfRecipes(response.data.listOfRecipes);
+                setLikedRecipes(response.data.likedRecipes.map((like)=>{return like.RecipeId}));
+            });
+        };
     }, []); 
 
     const likeRecipe = (recipeId) => {
