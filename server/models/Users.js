@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
 
     // Associating each recipe with its comments
     Users.associate = (models) => {
-        Users.hasMany(models.Recipes, {
-            onDelete: "cascade", // If recipe is deleted, all comments related will be deleted also
+        Users.hasMany(models.Likes, {
+            onDelete: "cascade", 
         });
     };
 
