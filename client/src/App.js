@@ -5,6 +5,7 @@ import NewRecipe from './pages/NewRecipe';
 import Recipe from './pages/Recipe';
 import Registration from "./pages/Registration"
 import Login from './pages/Login';
+import PageNotFound from './pages/PageNotFound';
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -56,6 +57,7 @@ function App() {
             <Route path="/Recipe/:id" exact element={<Recipe/>}/>
             <Route path="/registration" exact element={<Registration/>}/>
             <Route path="/login" exact element={<Login/>}/>
+            <Route path="*" exact element={<PageNotFound/>}/>
           </Routes>
         </Router>
       </AuthContext.Provider>

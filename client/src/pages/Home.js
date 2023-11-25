@@ -3,7 +3,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Favorite from '@mui/icons-material/Favorite';
-import { red } from '@mui/material/colors';
 
 function Home() {
     const[listOfRecipes, setListOfRecipes] = useState([]);
@@ -41,7 +40,7 @@ function Home() {
             }))
 
             if (likedRecipes.includes(recipeId)) {
-                setLikedRecipes(likedRecipes.filter((id) => {return id != recipeId}))
+                setLikedRecipes(likedRecipes.filter((id) => {return id !== recipeId}))
             } else {
                 setLikedRecipes([...likedRecipes, recipeId]);
             }
