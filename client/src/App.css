@@ -13,3 +13,11 @@ a {
   padding: 10px;
   margin: 10px;
 }
+
+.likeBttn {
+  color: rgba(250, 0, 0, 0.33);
+}
+
+.unlikeBttn {
+  color: rgba(250, 0, 0, 1);
+}

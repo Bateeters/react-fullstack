@@ -2,15 +2,22 @@ import React from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import Favorite from '@mui/icons-material/Favorite';
+import { red } from '@mui/material/colors';
 
 function Home() {
     const[listOfRecipes, setListOfRecipes] = useState([]);
+    const [likedRecipes, setLikedRecipes] = useState([]);
     let navigate = useNavigate();
 
     useEffect(()=> {
-      axios.get("http://localhost:3001/recipes").then((response)=>{
-        setListOfRecipes(response.data);
-      });
+        axios
+        .get("http://localhost:3001/recipes",
+            { headers: {accessToken: localStorage.getItem('accessToken')}}
+        ).then((response)=>{
+            setListOfRecipes(response.data.listOfRecipes);
+            setLikedRecipes(response.data.likedRecipes.map((like)=>{return like.RecipeId}));
+        });
     }, []); 
 
     const likeRecipe = (recipeId) => {
@@ -32,6 +39,12 @@ function Home() {
                     return recipe;
                 }
             }))
+
+            if (likedRecipes.includes(recipeId)) {
+                setLikedRecipes(likedRecipes.filter((id) => {return id != recipeId}))
+            } else {
+                setLikedRecipes([...likedRecipes, recipeId]);
+            }
         });
     };
 
@@ -43,9 +56,11 @@ function Home() {
                     <div className="title" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.title}</div>
                     <div className="body" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.stepsText}</div>
                     <div className="footer">{value.username}
-                        <button onClick={() => {likeRecipe(value.id)}}>
-                        Like
-                        </button>
+                        <Favorite                          
+                            onClick={() =>{
+                                likeRecipe(value.id);
+                            }}
+                            className={likedRecipes.includes(value.id) ? "unlikeBttn": "likeBttn"}/>
                         <label>{value.Likes.length}</label>
                     </div>
                 </div>
