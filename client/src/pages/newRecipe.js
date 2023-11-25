@@ -11,8 +11,7 @@ function NewRecipe() {
 
     const initialValues ={
         title: "",
-        stepsText: "",
-        username: ""
+        stepsText: ""
     };
 
     useEffect(()=>{
@@ -24,11 +23,14 @@ function NewRecipe() {
     const validationSchema = Yup.object().shape({
         title: Yup.string().required(),
         stepsText: Yup.string().required(),
-        username: Yup.string().min(6).max(24).required()
     });
 
     const onSubmit = (data) => {
-        axios.post("http://localhost:3001/recipes", data).then((response)=>{
+
+        axios
+        .post("http://localhost:3001/recipes", data, {headers: {accessToken: localStorage.getItem('accessToken')},
+        })
+        .then((response)=>{
             navigate('/');
         });
     };
@@ -45,10 +47,7 @@ function NewRecipe() {
                     <label>Steps: </label>
                     <ErrorMessage name="stepsText" component="span"/>
                     <Field id="inputCreateRecipe" name="stepsText" placeholder="(Steps)"/>
-                    <label>Username: </label>
-                    <ErrorMessage name="username" component="span"/>
-                    <Field id="inputCreateRecipe" name="username" placeholder="(Username)"/>
-                    <button type="submit">Add Recipe</button>
+                    <button type='submit'> Add Recipe </button>
                 </Form>
             </Formik>
         </div>

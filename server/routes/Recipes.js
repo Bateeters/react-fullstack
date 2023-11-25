@@ -18,8 +18,9 @@ router.get('/byId/:id', async (req,res) => {
 });
 
 // Post Request
-router.post("/", async (req, res) =>{
+router.post("/", validateToken, async (req, res) =>{
     const recipe = req.body;
+    recipe.username = req.user.username;
     await Recipes.create(recipe);
     res.json(recipe);
 });
