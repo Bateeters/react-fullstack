@@ -25,4 +25,17 @@ router.post("/", validateToken, async (req, res) =>{
     res.json(recipe);
 });
 
+router.delete("/:recipeId", validateToken, async (req, res) =>{
+    const recipeId = req.params.recipeId;
+
+    await Recipes.destroy({
+        where: {
+            id: recipeId,
+        },
+    });
+
+    res.json("RECIPE DELETED");
+
+})
+
 module.exports = router;

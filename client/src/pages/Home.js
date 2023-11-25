@@ -6,14 +6,14 @@ import Favorite from '@mui/icons-material/Favorite';
 import { AuthContext } from '../helpers/AuthContext';
 
 function Home() {
-    const[listOfRecipes, setListOfRecipes] = useState([]);
+    const [listOfRecipes, setListOfRecipes] = useState([]);
     const [likedRecipes, setLikedRecipes] = useState([]);
     const { authState } = useContext(AuthContext);
     let navigate = useNavigate();
 
     useEffect(()=> {
 
-        if (!authState.status){
+        if (!localStorage.getItem("accessToken")){
             navigate("/login");
         } else {
             axios

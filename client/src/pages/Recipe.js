@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext';
 
@@ -9,6 +9,8 @@ function Recipe() {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const { authState } = useContext(AuthContext);
+
+    let navigate = useNavigate();
 
     useEffect(() => {
         // Get data for specific recipe
@@ -60,14 +62,30 @@ function Recipe() {
         });
     };
 
+    const deleteRecipe = (id) => {
+        axios
+        .delete(`http://localhost:3001/recipes/${id}`,
+            {headers: {accessToken: localStorage.getItem("accessToken")}})
+        .then(()=>{
+            navigate('/')
+        })
+    };
+
     return (
         <div className='recipePage'>
 
             <div className='leftSide'>
                 <div className='recipeSection'>
-                    <div className='title'>{recipeObject.title}</div>
+                    <div className='title'>{recipeObject.title} 
+                        {authState.username === recipeObject.username && (
+                            <button onClick ={()=>{
+                                deleteRecipe(recipeObject.id);
+                            }}> X </button>
+                        )}
+                    </div>
                     <div className='stepsText'>{recipeObject.stepsText}</div>
-                    <div className='footer'>{recipeObject.username}</div>
+                    <div className='footer'>{recipeObject.username}
+                    </div>
                 </div>
             </div>
 
