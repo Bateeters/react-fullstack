@@ -17,10 +17,20 @@ router.get('/byId/:id', async (req,res) => {
     res.json(recipe);
 });
 
+router.get('/byUserId/:id', async (req,res) => {
+    const id = req.params.id;
+    const listOfRecipes = await Recipes.findAll({
+        where: {UserId: id},
+        include: [Likes],
+    });
+    res.json(listOfRecipes);
+});
+
 // Post Request
 router.post("/", validateToken, async (req, res) =>{
     const recipe = req.body;
     recipe.username = req.user.username;
+    recipe.UserId = req.user.id;
     await Recipes.create(recipe);
     res.json(recipe);
 });

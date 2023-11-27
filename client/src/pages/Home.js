@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Favorite from '@mui/icons-material/Favorite';
 import { AuthContext } from '../helpers/AuthContext';
 
@@ -61,7 +61,8 @@ function Home() {
                 <div key={key} className="recipe">
                     <div className="title" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.title}</div>
                     <div className="body" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.stepsText}</div>
-                    <div className="footer">{value.username}
+                    <div className="footer">
+                        <Link to={`/profile/${value.UserId}`}>{value.username}</Link>
                         <Favorite                          
                             onClick={() =>{
                                 likeRecipe(value.id);
