@@ -35,6 +35,18 @@ router.post("/", validateToken, async (req, res) =>{
     res.json(recipe);
 });
 
+router.put("/title", validateToken, async (req, res) =>{
+    const {newTitle, id} = req.body;
+    await Recipes.update({title: newTitle},{where: {id: id}});
+    res.json(newTitle);
+});
+
+router.put("/recipeText", validateToken, async (req, res) =>{
+    const {newText, id} = req.body;
+    await Recipes.update({stepsText: newText},{where: {id: id}});
+    res.json(newText);
+});
+
 router.delete("/:recipeId", validateToken, async (req, res) =>{
     const recipeId = req.params.recipeId;
 

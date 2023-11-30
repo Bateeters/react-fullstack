@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Recipe() {
     let {id} = useParams();
@@ -71,6 +73,25 @@ function Recipe() {
         })
     };
 
+    const editRecipe = (option) => {
+        if (option === "title"){
+            let newTitle = prompt("Enter New Title:");
+            axios.put("http://localhost:3001/recipes/title", {newTitle: newTitle, id: id},
+            {headers: {accessToken: localStorage.getItem("accessToken")}})
+
+            setRecipeObject({...recipeObject, title: newTitle})
+
+        } else { // change to "else if" statements if changing to edit individual steps
+            let newRecipeText = prompt("Enter New Steps:");
+            axios.put("http://localhost:3001/recipes/recipeText", {newText: newRecipeText, id: id},
+            {headers: {accessToken: localStorage.getItem("accessToken")}})
+
+            setRecipeObject({...recipeObject, stepsText: newRecipeText})
+        }
+
+
+    }
+
     return (
         <div className='recipePage'>
 
@@ -78,13 +99,30 @@ function Recipe() {
                 <div className='recipeSection'>
                     <div className='title'>{recipeObject.title} 
                         {authState.username === recipeObject.username && (
-                            <button onClick ={()=>{
-                                deleteRecipe(recipeObject.id);
-                            }}> X </button>
+                            <EditIcon onClick={()=>{
+                                if (authState.username === recipeObject.username) {
+                                    editRecipe("title");
+                            }}}> 
+                            Edit Title
+                            </EditIcon>
                         )}
                     </div>
-                    <div className='stepsText'>{recipeObject.stepsText}</div>
+                    <div className='stepsText'>{recipeObject.stepsText}
+                    {authState.username === recipeObject.username && (
+                            <EditIcon onClick={()=>{
+                                if (authState.username === recipeObject.username) {
+                                    editRecipe("steps");
+                            }}}> 
+                            Edit Steps
+                            </EditIcon>
+                        )}
+                    </div>
                     <div className='footer'>{recipeObject.username}
+                        {authState.username === recipeObject.username && (
+                            <DeleteIcon onClick ={()=>{
+                                deleteRecipe(recipeObject.id);
+                            }}> Delete </DeleteIcon>
+                        )}
                     </div>
                 </div>
             </div>
