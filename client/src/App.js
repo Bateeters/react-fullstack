@@ -7,6 +7,7 @@ import Registration from "./pages/Registration"
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
+import ChangePassword from './pages/ChangePassword';
 
 
 import { AuthContext } from './helpers/AuthContext';
@@ -62,6 +63,7 @@ function App() {
             <Route path="/registration" exact element={<Registration/>}/>
             <Route path="/login" exact element={<Login/>}/>
             <Route path="/profile/:id" exact element={<Profile/>}/>
+            <Route path="/changepassword" exact element={<ChangePassword/>}/>
             <Route path="*" exact element={<PageNotFound/>}/>
           </Routes>
         </Router>
