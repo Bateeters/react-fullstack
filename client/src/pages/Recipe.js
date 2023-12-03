@@ -94,43 +94,50 @@ function Recipe() {
 
     return (
         <div className='recipePage'>
+            <div className='topPortion'>
+                <div className='leftSide'>
+                    <div className='recipe' id='individual'>
+                        <div className='individualTitle'>{recipeObject.title+"       "} 
+                            {authState.username === recipeObject.username && (
+                                <EditIcon onClick={()=>{
+                                    if (authState.username === recipeObject.username) {
+                                        editRecipe("title");
+                                }}}> 
+                                Edit Title
+                                </EditIcon>
+                            )}
+                        </div>
+                        <div className='individualBody'>
+                            <div className='editButton'>
+                                {authState.username === recipeObject.username && (
+                                    <EditIcon onClick={()=>{
+                                        if (authState.username === recipeObject.username) {
+                                            editRecipe("steps");
+                                    }}}> 
+                                    Edit Steps
+                                    </EditIcon>
+                                )}
+                            </div>
+                            <div className='stepText'>
+                                {recipeObject.stepsText}
+                            </div>
+                        </div>
+                        <div className='individualFooter'>{recipeObject.username}
+                            {authState.username === recipeObject.username && (
+                                <DeleteIcon onClick ={()=>{
+                                    deleteRecipe(recipeObject.id);
+                                }}> Delete </DeleteIcon>
+                            )}
+                        </div>
+                    </div>
+                </div>
 
-            <div className='leftSide'>
-                <div className='recipeSection'>
-                    <div className='title'>{recipeObject.title} 
-                        {authState.username === recipeObject.username && (
-                            <EditIcon onClick={()=>{
-                                if (authState.username === recipeObject.username) {
-                                    editRecipe("title");
-                            }}}> 
-                            Edit Title
-                            </EditIcon>
-                        )}
-                    </div>
-                    <div className='stepsText'>{recipeObject.stepsText}
-                    {authState.username === recipeObject.username && (
-                            <EditIcon onClick={()=>{
-                                if (authState.username === recipeObject.username) {
-                                    editRecipe("steps");
-                            }}}> 
-                            Edit Steps
-                            </EditIcon>
-                        )}
-                    </div>
-                    <div className='footer'>{recipeObject.username}
-                        {authState.username === recipeObject.username && (
-                            <DeleteIcon onClick ={()=>{
-                                deleteRecipe(recipeObject.id);
-                            }}> Delete </DeleteIcon>
-                        )}
+                <div className='rightSide'>
+                    <div className='ingredientsContainer'>
+                        Ingredients Section
                     </div>
                 </div>
             </div>
-
-            <div className='rightSide'>
-                <div>Ingredients Section</div>
-            </div>
-
             <div className='commentsSection'>
                 <div className='addCommentContainer'>
                     <input 

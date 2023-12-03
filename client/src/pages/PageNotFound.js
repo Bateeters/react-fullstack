@@ -5,7 +5,7 @@ function PageNotFound() {
   return (
     <div>
         <h1>Page Not Found.</h1>
-        <h3>Return to Home: <Link to="/"> Home </Link> </h3>
+        <h3><Link className="errorPageLink" to="/"> Return to Home </Link></h3>
     </div>
   )
 }

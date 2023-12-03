@@ -55,24 +55,28 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className='recipeGrid'>
             {listOfRecipes.map((value, key) => { 
                 return (
                 <div key={key} className="recipe">
                     <div className="title" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.title}</div>
                     <div className="body" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.stepsText}</div>
                     <div className="footer">
-                        <Link to={`/profile/${value.UserId}`}>{value.username}</Link>
-                        <Favorite                          
-                            onClick={() =>{
-                                likeRecipe(value.id);
-                            }}
-                            className={likedRecipes.includes(value.id) ? "unlikeBttn": "likeBttn"}/>
-                        <label>{value.Likes.length}</label>
+                        <div className='username'>
+                            <Link to={`/profile/${value.UserId}`}>{value.username}</Link>
+                        </div>
+                        <div className='buttons'>
+                            <Favorite                          
+                                onClick={() =>{
+                                    likeRecipe(value.id);
+                                }}
+                                className={likedRecipes.includes(value.id) ? "unlikeBttn": "likeBttn"}/>
+                            <label>{value.Likes.length}</label>
+                        </div>
                     </div>
                 </div>
-                );
-            })};
+                )
+            })}
         </div>
     )
 }

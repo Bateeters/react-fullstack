@@ -24,9 +24,10 @@ function Login() {
   };
 
   return (
-    <div>
-      <input type="text" onChange={(event)=> {setUsername(event.target.value);}}/>
-      <input type="password" onChange={(event) => {setPassword(event.target.value)}}/>
+    <div className='loginContainer'>
+      <h1> Login to CookMark </h1>
+      <input placeholder=" Username" type="text" onChange={(event)=> {setUsername(event.target.value);}}/>
+      <input placeholder=" Password" type="password" onChange={(event) => {setPassword(event.target.value)}}/>
       <button onClick={login}>Login</button>
     </div>
   )

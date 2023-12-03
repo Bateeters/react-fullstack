@@ -40,13 +40,11 @@ function NewRecipe() {
     return (
         <div className='createRecipePage'>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <Form>
-                    <label>Title: </label>
+                <Form className='formContainer'>
                     <ErrorMessage name="title" component="span"/>
-                    <Field id="inputCreateRecipe" name="title" placeholder="(Title)"/>
-                    <label>Steps: </label>
+                    <Field autoComplete="off" id="inputCreateRecipe" name="title" placeholder="Title"/>
                     <ErrorMessage name="stepsText" component="span"/>
-                    <Field id="inputCreateRecipe" name="stepsText" placeholder="(Steps)"/>
+                    <Field autoComplete="off" id="inputCreateRecipe" name="stepsText" placeholder="Steps"/>
                     <button type='submit'> Add Recipe </button>
                 </Form>
             </Formik>

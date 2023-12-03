@@ -47,14 +47,17 @@ function Profile() {
                     <div key={key} className="recipe">
                         <div className="title" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.title}</div>
                         <div className="body" onClick={() => {navigate(`/recipe/${value.id}`)}}>{value.stepsText}</div>
-                        <div className="footer">{value.username}
-                            <Favorite                          
-                                className={likedRecipes.includes(value.id) ? "unlikeBttn": "likeBttn"}/>
-                            <label>{value.Likes.length}</label>
+                        <div className="footer">
+                            <div className='username'>{value.username}</div>
+                            <div className='buttons'>
+                                <Favorite                          
+                                    className={likedRecipes.includes(value.id) ? "unlikeBttn": "likeBttn"}/>
+                                <label>{value.Likes.length}</label>
+                            </div>
                         </div>
                     </div>
-                );
-            })};
+                )
+            })}
         </div>
     </div>
     )

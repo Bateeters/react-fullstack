@@ -24,13 +24,12 @@ function Registration() {
     return (
         <div>
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <Form>
-                    <label>Username: </label>
+                <Form className='formContainer'>
+                    <h1>Create Your CookMark Account</h1>
                     <ErrorMessage name="username" component="span"/>
-                    <Field autoComplete="off" id="inputCreateRecipe" name="username" placeholder="(Username)"/>
-                    <label>Password: </label>
+                    <Field autoComplete="off" id="inputCreateRecipe" name="username" placeholder="Username"/>
                     <ErrorMessage name="password" component="span"/>
-                    <Field type="password" autoComplete="off" id="inputCreateRecipe" name="password" placeholder="(Your Password)"/>
+                    <Field type="password" autoComplete="off" id="inputCreateRecipe" name="password" placeholder="Password"/>
                     <button type="submit"> Register </button>
                 </Form>
             </Formik>

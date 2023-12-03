@@ -1,17 +1,81 @@
 .App {
+  width: 100%;
+  height: auto;
+  display: flex;
   text-align: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: floralwhite;
+}
+
+.recipeGrid{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .recipe {
-  border: 1px solid black;
-  margin: 50px 400px;
-  padding: 20px;
+  width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  border: 1px solid darkolivegreen;
+  font-family: Arial, Helvetica, sans-serif;
+
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-a {
-  border: 1px solid black;
-  padding: 10px;
-  margin: 10px;
+.recipe:hover {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  cursor: pointer;
+}
+
+.recipe .title {
+  flex: 20%;
+  border-bottom: 1px solid darkolivegreen;
+  background-color: darkolivegreen;
+  display: grid;
+  place-content: center;
+  color: floralwhite;
+  font-size: x-large;
+}
+
+
+.recipe .body {
+  padding: 15px;
+  flex: 60%;
+  display: grid;
+  place-content: center;
+}
+
+.recipe .footer {
+  flex: 20%;
+  border-top: 1px solid darkolivegreen;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  color: darkolivegreen;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.footer .buttons, .footer a {
+  flex: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: darkolivegreen;
 }
 
 .likeBttn {
@@ -20,4 +84,291 @@ a {
 
 .unlikeBttn {
   color: rgba(250, 0, 0, 1);
+}
+
+.buttons label {
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+/* ----------------- New Recipe Page CSS ------------------ */
+
+.createRecipePage {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 100vw;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: auto;
+  padding: 20px;
+  border: 5px solid darkolivegreen;
+  border-radius: 5px;
+}
+
+.formContainer #inputCreateRecipe {
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
+.formContainer button {
+  margin-top: 15px;
+  height: 40px;
+  border: 1px solid darkolivegreen;
+  background-color: lightgreen;
+  border-radius: 5px;
+  color: darkolivegreen;
+}
+
+.formContainer button:hover {
+  cursor: pointer;
+  background-color: darkolivegreen;
+}
+
+span {
+  color: red;
+}
+
+/* ------------ Navbar CSS ---------------- */
+
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: darkolivegreen;
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.navbar .links {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: large;
+}
+
+.navbar .loggedInContainer {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: large;
+}
+a {
+  font-size: large;
+  margin-left: 20px;
+  text-decoration: none;
+  color: floralwhite;
+}
+
+.navbar button {
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  margin-right: 10px;
+  background-color: floralwhite;
+}
+
+.navbar h3 {
+  text-align: right;
+  margin-right: 10px;
+  color: floralwhite;
+  font-weight: lighter;
+}
+
+
+/* ------------------ Individual Recipe CSS ------------------ */
+.recipePage {
+  width: 100%;
+  height: 100%;
+}
+
+.topPortion{
+  display: flex;
+  flex-direction: row;
+}
+
+.leftSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: grid;
+  justify-items: center;
+}
+
+.recipe .individualTitle {
+  border-bottom: 1px solid darkolivegreen;
+  background-color: darkolivegreen;
+  flex: 20%;
+  display: inline-flex;
+  align-items: center;
+  padding: 15px;
+  justify-content: space-between;
+  color: floralwhite;
+  font-size: x-large;
+}
+
+.recipe .individualBody {
+  flex: 60%;
+  font-size: large;
+}
+
+.recipe .editButton {
+  padding: 15px;
+  display: grid;
+  align-content: stretch;
+  justify-items: end;
+  font-size: large;
+}
+
+.recipe .stepText{
+  padding: 15px;
+}
+
+.recipe .individualFooter {
+  flex: 20%;
+  border-top: 1px solid darkolivegreen;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: darkolivegreen;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  justify-content: space-between;
+  font-size: x-large;
+}
+
+.rightSide {
+  flex: 50%;
+  height: calc(100vh - 70px);
+  display: grid;
+  place-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.rightSide .ingredientsContainer {
+  flex: 20%;
+  width: 100%;
+  display: grid;
+  margin-top: 25px;
+  font-size: x-large;
+}
+
+.commentsSection .addCommentContainer {
+  flex: 20%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 25px;
+}
+
+.addCommentContainer input,
+button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+}
+
+.addCommentContainer button {
+  background-color: darkolivegreen;
+  color: floralwhite;
+}
+
+.addCommentContainer input {
+  border: 2px solid darkolivegreen;
+}
+
+.commentsSection .listOfComments {
+  flex: 80%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listOfComments .comment {
+  width: 70%;
+  height: auto;
+  padding: 30px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+#individual {
+  height: calc(100vh - 300px);
+  width: 600px;
+}
+
+#individual .title,
+#individual .footer {
+  font-size: 30px;
+}
+
+#individual .stepsText {
+  font-size: 25px;
+}
+
+/* ------------------ Login Page CSS ------------------ */
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  padding-top: 100px;
+}
+
+.loginContainer input,
+button {
+  width: 200px;
+  height: 50px;
+  border-radius: 8px;
+  border: none;
+  margin: 10px;
+}
+
+.loginContainer button {
+  background-color: darkolivegreen;
+  color: floralwhite;
+}
+
+.loginContainer input {
+  border: 2px solid darkolivegreen;
+}
+
+/* ------------- Profile Page CSS ------------------ */
+
+.profilePageContainer {
+  display: contents;
+}
+
+.basicInfo {
+  width: 100%;
+  border-bottom: 1px solid darkolivegreen;
+}
+
+/* ------------- Misc CSS ------------- */
+
+.errorPageLink {
+  color: darkolivegreen;
+}
+
+.errorPageLink:hover {
+  cursor: pointer;
 }
